@@ -10,8 +10,9 @@ class TestQuestionsMainPage:
     @allure.title('Проверка ответов на вопросы из выпадающего списка «Вопросы о важном»')
     @pytest.mark.parametrize('number, expected_answer', AnswersText.answer)
     def test_question(self, driver, number, expected_answer):
-        MainPage(driver).get_cookies(MainPageLocators.COOKIES_BTN)
-        MainPage(driver).scroll(MainPageLocators.LAST_QUESTION)
-        MainPage(driver).click_question(number)
-        answer = MainPage(driver).get_answer(number)
+        main_page = MainPage(driver) #Создание экземпляра класса MainPage
+        main_page.get_cookies(MainPageLocators.COOKIES_BTN)
+        main_page.scroll(MainPageLocators.LAST_QUESTION)
+        main_page.click_question(number)
+        answer = main_page.get_answer(number)
         assert answer == expected_answer
